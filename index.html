@@ -120,7 +120,7 @@
             let currentTime = new Date();
             console.log(currentTime);
             let currentHours = currentTime.getHours();
-            let ampm = (currentHours > 12)  ? 'AM' : 'PM';
+            let ampm = (currentHours < 12)  ? 'AM' : 'PM';
             currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
             document.querySelector("#hours").textContent = currentHours.toString().padStart(2, '0');
             document.querySelector("#minutes").textContent = currentTime.getMinutes().toString().padStart(2, '0');
