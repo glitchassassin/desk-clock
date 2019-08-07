@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Desk Clock</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="nosleep.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -135,6 +136,8 @@
         }
         document.addEventListener('DOMContentLoaded', () => {
             setInterval(updateTime, 500);
+            const noSleep = new NoSleep();
+            noSleep.enable();
             // updateTime();
         }, false);
     </script>
