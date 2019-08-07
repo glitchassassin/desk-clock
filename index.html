@@ -134,13 +134,17 @@
             document.querySelector("#day").textContent = currentTime.getDate().toString().padStart(2, '0');
             document.querySelector("#year").textContent = currentTime.getFullYear().toString().padStart(2, '0');
         }
+        const noSleep = new NoSleep();
         document.addEventListener('DOMContentLoaded', () => {
             setInterval(updateTime, 500);
-            const noSleep = new NoSleep();
             noSleep.enable();
             // updateTime();
         }, false);
+        document.addEventListener('pageshow', () => {
+            noSleep.noSleepVideo.play();
+        }
     </script>
+    
 </head>
 <body>
 <div id="overlay"></div>
