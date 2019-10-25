@@ -77,3 +77,8 @@ class NoSleep {
         }
     }
 }
+
+const noSleep = new NoSleep();
+document.addEventListener('pageshow', () => {
+    noSleep.noSleepVideo.play();
+});
