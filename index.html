@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <title>Desk Clock</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui/augmented.css">
     <script src="nosleep.js"></script>
     <link href="styles.css" rel="stylesheet" type="text/css">
     <script src="clock.js"></script>
+    <script src="timers.js" ></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateTime, 500);
+            noSleep.enable();
+            updateTime();
+            new WorkTimer();
+            new PomodoroTimer();
+        }, false);
+    </script>
 </head>
 <body>
 <div id="overlay"></div>
@@ -17,12 +28,35 @@
         <div id="seconds">00</div>
         <div id="ampm">PM</div>
     </div>
-    <div id="date" class="container">
+    <div id="date" class="container" augmented-ui="tr-clip-y exe">
         <div id="day_of_week">Monday</div>
         <div id="month_name">February</div>
         <div id="month">2</div>
         <div id="day">1</div>
         <div id="year">2019</div>
+    </div>
+</div>
+<div id="controls" class="container">
+    <div id="startwork" class="container" augmented-ui="tl-clip exe">
+        <div id="label">Start Work</div>
+        <div id="countdown" class="container">
+            <div id="startwork_hours">12</div>
+            <div id="startwork_minutes">00</div>
+        </div>
+    </div>
+    <div id="pomodoro" class="container">
+        <div id="spinner">
+            <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+                <circle cx="170" cy="170" r="160" stroke="#ddd"/>
+                <circle cx="170" cy="170" r="150" stroke="#ddd"/>
+                <circle cx="170" cy="170" r="140" stroke="#ddd"/>
+                <circle cx="170" cy="170" r="130" stroke="#ddd"/>
+            </svg>
+        </div>
+        <div id="pomodoro_countdown">
+            <div id="pomodoro_minutes">25</div>
+            <div id="pomodoro_seconds">00</div>
+        </div>
     </div>
 </div>
 </body>

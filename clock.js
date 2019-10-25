@@ -9,18 +9,9 @@ function updateTime() {
     document.querySelector("#seconds").textContent = currentTime.getSeconds().toString().padStart(2, '0');
     document.querySelector("#ampm").textContent = ampm;
 
-    document.querySelector("#day_of_week").textContent = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentTime.getDay());
+    document.querySelector("#day_of_week").textContent = new Intl.DateTimeFormat('en-US', {weekday: 'short'}).format(currentTime.getDay());
     document.querySelector("#month_name").textContent = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(currentTime.getMonth());
     document.querySelector("#month").textContent = (currentTime.getMonth()+1).toString().padStart(2, '0');
     document.querySelector("#day").textContent = currentTime.getDate().toString().padStart(2, '0');
     document.querySelector("#year").textContent = currentTime.getFullYear().toString().padStart(2, '0');
 }
-const noSleep = new NoSleep();
-document.addEventListener('DOMContentLoaded', () => {
-    setInterval(updateTime, 500);
-    noSleep.enable();
-    updateTime();
-}, false);
-document.addEventListener('pageshow', () => {
-    noSleep.noSleepVideo.play();
-});
