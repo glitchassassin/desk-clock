@@ -140,7 +140,7 @@ body {
     width: 25vw;
     height: 15vh;
     font-size: 3vw;
-    cursor: default;
+    cursor: pointer;
 
     --aug-border: 5px;
     --aug-border-bg: rgba(100, 200, 250, .8);
@@ -180,6 +180,7 @@ body {
     left: 40vw;
     width: 20vw;
     height: 40vh;
+    cursor: pointer;
 }
 
 #pomodoro_countdown {
