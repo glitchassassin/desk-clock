@@ -8,12 +8,16 @@
     <script src="nosleep.js"></script>
     <link href="styles.css" rel="stylesheet" type="text/css">
     <script src="clock.js"></script>
-    <script src="timers.js" ></script>
+    <script src="timers.js?3" ></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             setInterval(updateTime, 500);
-            noSleep.enable();
             updateTime();
+            noSleep.enable();
+            document.body.addEventListener('touchstart', () => {
+                console.log('enabling nosleep');
+                noSleep.enable();
+            })
             new WorkTimer();
             new PomodoroTimer();
         }, false);
@@ -37,14 +41,14 @@
     </div>
 </div>
 <div id="controls" class="container">
-    <div id="startwork" class="container" onclick="" augmented-ui="tl-clip exe">
+    <div id="startwork" class="container" augmented-ui="tl-clip exe">
         <div id="label">Start Work</div>
         <div id="countdown" class="container">
             <div id="startwork_hours">12</div>
             <div id="startwork_minutes">00</div>
         </div>
     </div>
-    <div id="pomodoro" class="container" onclick="">
+    <div id="pomodoro" class="container">
         <div id="spinner">
             <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
                 <circle cx="170" cy="170" r="160" stroke="#ddd"/>

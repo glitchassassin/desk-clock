@@ -1,14 +1,4 @@
 class Timer {
-    duration;
-    targetTime;
-    secondsElement;
-    hoursElement;
-    minutesElement;
-    storageId;
-    callback;
-
-    updateInterval;
-
     /**
      * The id is used to save the timer to LocalStorage in case the browser gets refreshed
      * If a new Timer is created, it checks to see if an existing countdown is stored with
@@ -21,6 +11,8 @@ class Timer {
      * @param callback
      */
     constructor(id, hoursElement, minutesElement, secondsElement, callback) {
+        this.duration = null;
+        this.targetTime = null;
         this.hoursElement = hoursElement;
         this.minutesElement = minutesElement;
         this.secondsElement = secondsElement;
@@ -29,7 +21,7 @@ class Timer {
 
         let existing = localStorage.getItem(this.storageId);
         if (existing) {
-            this.countdown(parseInt(existing) - Date.now())
+            this.countdown((parseInt(existing) - Date.now())/1000);
         }
         this.updateInterval = setInterval(() => (this.update()), 500);
     }
@@ -87,10 +79,9 @@ class Timer {
 }
 
 class WorkTimer {
-    started = false;
-    timer;
 
     constructor() {
+        this.started = false;
         document.querySelector('#startwork').addEventListener('click', () => {
             this.clicked();
         });
@@ -115,11 +106,8 @@ class WorkTimer {
 }
 
 class PomodoroTimer {
-    started = false;
-    activeTimer;
-    restTimer;
-
     constructor() {
+        this.started = false;
         document.querySelector('#pomodoro').addEventListener('click', () => {
             this.clicked();
         });
