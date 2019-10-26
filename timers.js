@@ -100,7 +100,9 @@ class WorkTimer {
             document.querySelector('#label').style.display = 'none';
             this.timer.countdown(10*60*60);
         } else {
-
+            this.started = false;
+            document.querySelector('#label').style.display = 'block';
+            this.timer.done();
         }
     }
 }
