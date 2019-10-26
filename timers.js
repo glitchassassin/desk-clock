@@ -98,7 +98,7 @@ class WorkTimer {
         if (!this.started) {
             this.started = true;
             document.querySelector('#label').style.display = 'none';
-            this.timer.countdown(10*60*60);
+            this.timer.countdown(10.5*60*60);
         } else {
             this.started = false;
             document.querySelector('#label').style.display = 'block';
