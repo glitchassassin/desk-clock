@@ -27,7 +27,7 @@ body {
     linear-gradient(90deg, #8af 2%, #111 0, #111 98%, #8af 0%) 0 0 #111;
     background-size: 40px 60px;
     color: #ddd;
-    font-size: 6vw;
+    font-size: 6vmax;
     font-family: 'Roboto Mono', sans-serif;
 }
 
@@ -46,7 +46,7 @@ body {
     border-radius: 10px;
     width: 80%;
     margin: 0 auto;
-    padding: 50px 0;
+    padding: 7.5vh 0;
     z-index: 1;
 }
 
@@ -54,15 +54,15 @@ body {
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 25vw;
-    height: 33vh;
-    font-size: 3vw;
+    width: 25vmax;
+    height: 33vmin;
+    font-size: 3vmax;
 
     --aug-border: 5px;
     --aug-border-bg: rgba(100, 200, 250, .8);
     --aug-inset: 5px;
     --aug-inset-bg: rgba(100, 200, 250, .3);
-    --aug-tr: 7vh;
+    --aug-tr: 7vmin;
     --aug-tr-height: 75%;
 }
 
@@ -105,12 +105,12 @@ body {
 #day_of_week {
     margin-right: 15px;
     width: 100%;
-    padding-right: 3vw;
-    padding-top: 3vh;
+    padding-right: 3vmax;
+    padding-top: 3vmin;
     text-align: center;
-    line-height: 15vh;
-    font-size: 7vw;
-    margin-bottom: 3vh;
+    line-height: 15vmin;
+    font-size: 7vmax;
+    margin-bottom: 3vmin;
     text-transform: uppercase;
 }
 
@@ -133,20 +133,24 @@ body {
     content: '/';
 }
 
+#controls {
+    z-index: 2;
+}
+
 #startwork {
     position: fixed;
     right: 0;
     bottom: 0;
-    width: 25vw;
-    height: 15vh;
-    font-size: 3vw;
+    width: 25vmax;
+    height: 15vmin;
+    font-size: 3vmax;
     cursor: pointer;
 
     --aug-border: 5px;
     --aug-border-bg: rgba(100, 200, 250, .8);
     --aug-inset: 5px;
     --aug-inset-bg: rgba(100, 200, 250, .3);
-    --aug-tl: 7vh;
+    --aug-tl: 7vmin;
 }
 
 #startwork:hover {
@@ -154,12 +158,12 @@ body {
 }
 
 #startwork #label {
-    line-height: 15vh;
+    line-height: 15vmin;
 }
 
 #countdown {
-    line-height: 15vh;
-    font-size: 5vw;
+    line-height: 15vmin;
+    font-size: 5vmax;
 }
 
 #startwork_hours, #startwork_minutes {
@@ -169,17 +173,19 @@ body {
 
 #startwork_hours:after {
     content: ':';
-    font-size: 5vw;
-    width: 2.5vw;
-    margin-left: -1vw;
+    font-size: 5vmax;
+    width: 2.5vmax;
+    margin-left: -1vmax;
 }
 
 #pomodoro {
     position: fixed;
-    bottom: 10vh;
-    left: 40vw;
-    width: 20vw;
-    height: 40vh;
+    bottom: 40%;
+    left: 50%;
+    margin-left: -10vmax;
+    margin-bottom: -10vmax;
+    width: 20vmax;
+    height: 20vmax;
     cursor: pointer;
 }
 
@@ -189,7 +195,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 5vw;
+    font-size: 5vmax;
 }
 
 #pomodoro_minutes, #pomodoro_seconds {
@@ -199,9 +205,9 @@ body {
 
 #pomodoro_minutes:after {
     content: ':';
-    font-size: 4vw;
-    width: 2vw;
-    margin-left: -.7vw;
+    font-size: 4vmax;
+    width: 2vmax;
+    margin-left: -.7vmax;
 }
 
 #spinner {
@@ -209,8 +215,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 40vh;
-    height: 40vh;
+    min-height: 20vmax;
+    height: 20vmax;
     width: 100%;
 }
 
