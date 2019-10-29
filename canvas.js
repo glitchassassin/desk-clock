@@ -2,7 +2,6 @@ let gridSize = 50;
 let scale = Math.max(window.innerWidth, window.innerHeight) / gridSize;
 let speed = 0.01;
 function generateLayers() {
-    console.log(window.innerWidth, window.innerHeight);
     return [
         {
             canvas: document.createElement('canvas'),
