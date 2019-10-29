@@ -1,5 +1,7 @@
 let gridSize = 50;
 let scale = Math.max(window.innerWidth, window.innerHeight) / gridSize;
+let speed = 0.01;
+let backgroundCanvas;
 function generateCircuit(nodeCount) {
     let nodes = [...Array(nodeCount)].map(() => ({
         x: Math.floor(Math.random() * gridSize),
@@ -50,64 +52,155 @@ function generateCircuit(nodeCount) {
     })));
     return connections;
 }
-function drawCircuit(ctx, circuit) {
-    circuit.forEach((connection) => {
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighten';
-        ctx.beginPath();
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = 'rgba(100, 200, 250, .8)';
-        let x1 = connection.node1.x;
-        let x2 = connection.node2.x;
-        let dx = connection.node2.x - connection.node1.x;
-        let y1 = connection.node1.y;
-        let y2 = connection.node2.y;
-        let dy = connection.node2.y - connection.node1.y;
-        if (connection.orient === 0) {
-            console.log(connection);
-            console.log(x1, y1);
-            console.log(x1, (y1 + (dy / 2)));
-            console.log((x1 + (dx / 2)), (y1 + (dy / 2)));
-            console.log((x1 + (dx / 2)), y2);
-            console.log(x2, y2);
-            ctx.moveTo(scale * x1, scale * y1);
-            ctx.lineTo(scale * x1, scale * (y1 + (dy / 2)));
-            ctx.lineTo(scale * (x1 + (dx / 2)), scale * (y1 + (dy / 2)));
-            ctx.lineTo(scale * (x1 + (dx / 2)), scale *y2);
-            ctx.lineTo(scale * x2, scale * y2);
-        } else {
-            ctx.moveTo(scale * x1, scale * y1);
-            ctx.lineTo(scale * (x1 + (dx / 2)), scale *y1);
-            ctx.lineTo(scale * (x1 + (dx / 2)), scale * (y1 + (dy / 2)));
-            ctx.lineTo(scale * x2, scale * (y1 + (dy / 2)));
-            ctx.lineTo(scale * x2, scale * y2);
-        }
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(200, 250, 255, 1)';
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(100, 200, 250, 1)';
-        ctx.arc(scale * connection.node1.x, scale * connection.node1.y, 8, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(200, 250, 255, 1)';
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(100, 200, 250, 1)';
-        ctx.arc(scale * connection.node2.x, scale * connection.node2.y, 8, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.restore();
-    })
+function drawLineSegment(ctx, connection) {
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(100, 200, 250, .8)';
+    ctx.shadowBlur = 5;
+    let x1 = connection.node1.x;
+    let x2 = connection.node2.x;
+    let dx = connection.node2.x - connection.node1.x;
+    let y1 = connection.node1.y;
+    let y2 = connection.node2.y;
+    let dy = connection.node2.y - connection.node1.y;
+    if (connection.orient === 0) {
+        ctx.moveTo(scale * x1, scale * y1);
+        ctx.lineTo(scale * x1, scale * (y1 + (dy / 2)));
+        ctx.lineTo(scale * (x1 + (dx / 2)), scale * (y1 + (dy / 2)));
+        ctx.lineTo(scale * (x1 + (dx / 2)), scale *y2);
+        ctx.lineTo(scale * x2, scale * y2);
+    } else {
+        ctx.moveTo(scale * x1, scale * y1);
+        ctx.lineTo(scale * (x1 + (dx / 2)), scale *y1);
+        ctx.lineTo(scale * (x1 + (dx / 2)), scale * (y1 + (dy / 2)));
+        ctx.lineTo(scale * x2, scale * (y1 + (dy / 2)));
+        ctx.lineTo(scale * x2, scale * y2);
+    }
+    ctx.stroke();
 }
-let circuits = [generateCircuit(20), generateCircuit(20), generateCircuit(20)];
+function drawNodes(ctx, connection) {
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(200, 250, 255, 1)';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = 'rgba(100, 200, 250, 1)';
+    ctx.arc(scale * connection.node1.x, scale * connection.node1.y, 8, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(200, 250, 255, 1)';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = 'rgba(100, 200, 250, 1)';
+    ctx.arc(scale * connection.node2.x, scale * connection.node2.y, 8, 0, 2 * Math.PI);
+    ctx.fill();
+}
+function drawPacket(ctx, packet, connection) {
+    let packetPoint = {
+        x: 0,
+        y: 0
+    };
+    let x1 = connection.node1.x;
+    let x2 = connection.node2.x;
+    let dx = connection.node2.x - connection.node1.x;
+    let y1 = connection.node1.y;
+    let y2 = connection.node2.y;
+    let dy = connection.node2.y - connection.node1.y;
+    // orient 0:   orient 1:
+    //     |--         __|
+    // A __|       -> |
+    // | |          --|
+    if (packet.progress < 0.25) {
+        if (connection.orient === 0) {
+            packetPoint.x = x1;
+            packetPoint.y = (y1 + ((dy / 2) * (packet.progress * 4)));
+        } else {
+            packetPoint.x = (x1 + ((dx / 2) * (packet.progress * 4)));
+            packetPoint.y = y1;
+        }
+    } else if (packet.progress < 0.5) {
+        if (connection.orient === 0) {
+            packetPoint.x = (x1 + ((dx / 2) * ((packet.progress - 0.25) * 4)));
+            packetPoint.y = (y1 + ((dy / 2)));
+        } else {
+            packetPoint.x = (x1 + ((dx / 2)));
+            packetPoint.y = (y1 + ((dy / 2) * ((packet.progress - 0.25) * 4)));
+        }
+    } else if (packet.progress < 0.75) {
+        if (connection.orient === 0) {
+            packetPoint.x = (x1 + ((dx / 2)));
+            packetPoint.y = (y1 + ((dy / 2) * (1 + ((packet.progress - 0.5) * 4))))
+        } else {
+            packetPoint.x = (x1 + ((dx / 2) * (1 + ((packet.progress - 0.5) * 4))));
+            packetPoint.y = (y1 + ((dy / 2)));
+        }
+    } else {
+        if (connection.orient === 0) {
+            packetPoint.x = (x1 + ((dx / 2) * (1 + ((packet.progress - 0.75) * 4))));
+            packetPoint.y = (y2);
+        } else {
+            packetPoint.x = (x2);
+            packetPoint.y = (y1 + ((dy / 2) * (1 + ((packet.progress - 0.75) * 4))));
+        }
+    }
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(200, 250, 255, .7)';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = 'rgba(100, 200, 250, .7)';
+    ctx.fillRect((scale * packetPoint.x) - 4, (scale * packetPoint.y) - 4, 8, 8);
+    ctx.fill();
+}
+function drawLayer(layer) {
+    let ctx = layer.canvas.getContext('2d');
+    ctx.globalCompositeOperation = 'lighten';
+    layer.circuit.forEach((connection) => {
+        drawLineSegment(ctx, connection);
+        drawNodes(ctx, connection);
+    });
+}
+let layers = [
+    {
+        canvas: document.createElement('canvas'),
+        circuit: generateCircuit(20),
+        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+    },
+    {
+        canvas: document.createElement('canvas'),
+        circuit: generateCircuit(20),
+        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+    },
+    {
+        canvas: document.createElement('canvas'),
+        circuit: generateCircuit(20),
+        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+    }
+];
+
 
 function draw(ctx) {
-    // requestAnimationFrame(() => (draw(ctx)));
-    circuits.forEach(circuit => {
-        drawCircuit(ctx, circuit);
+    requestAnimationFrame(() => (draw(ctx)));
+    if (!layers[0].canvas || layers[0].canvas.width !== window.innerWidth || layers[0].canvas.height !== window.innerHeight) {
+        layers.forEach(layer => {
+            layer.canvas.width = window.innerWidth;
+            layer.canvas.height = window.innerHeight;
+
+            let layer_ctx = layer.canvas.getContext('2d');
+            layer_ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            drawLayer(layer);
+        });
+    }
+
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    layers.forEach(layer => {
+        ctx.drawImage(layer.canvas, 0, 0);
+        layer.packets.forEach((packet) => {
+            drawPacket(ctx, packet, layer.circuit[packet.circuit]);
+            packet.progress += speed;
+            if (packet.progress > 1) {
+                packet.circuit = Math.floor(Math.random() * layer.circuit.length);
+                packet.progress = 0;
+            }
+        });
         ctx.fillStyle = 'rgba(0,0,0,0.5)';
         ctx.shadowColor = 'transparent';
-        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     })
 }
 function resizeCanvas() {
