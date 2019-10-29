@@ -22,7 +22,7 @@
             new WorkTimer();
             new PomodoroTimer();
 
-            document.body.addEventListener('resize', resizeCanvas);
+            window.addEventListener('resize', resizeCanvas);
             window.addEventListener('deviceorientation', resizeCanvas);
             resizeCanvas();
             let canvas = document.querySelector('#background');
