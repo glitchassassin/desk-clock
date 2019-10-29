@@ -72,7 +72,7 @@ function generateCircuit(nodeCount) {
 }
 function drawLineSegment(ctx, connection) {
     ctx.beginPath();
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.strokeStyle = 'rgba(100, 200, 250, .8)';
     ctx.shadowBlur = 5;
     let x1 = connection.node1.x;
@@ -161,7 +161,7 @@ function drawPacket(ctx, packet, connection) {
     ctx.beginPath();
     ctx.fillStyle = 'rgba(200, 250, 255, .7)';
     ctx.shadowBlur = 10;
-    ctx.shadowColor = 'rgba(100, 200, 250, .7)';
+    ctx.shadowColor = 'rgba(100, 200, 250, .3)';
     ctx.fillRect((scale * packetPoint.x) - 4, (scale * packetPoint.y) - 4, 8, 8);
     ctx.fill();
 }
