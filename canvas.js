@@ -1,7 +1,26 @@
 let gridSize = 50;
 let scale = Math.max(window.innerWidth, window.innerHeight) / gridSize;
 let speed = 0.01;
-let backgroundCanvas;
+function generateLayers() {
+    console.log(window.innerWidth, window.innerHeight);
+    return [
+        {
+            canvas: document.createElement('canvas'),
+            circuit: generateCircuit(20),
+            packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+        },
+        {
+            canvas: document.createElement('canvas'),
+            circuit: generateCircuit(20),
+            packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+        },
+        {
+            canvas: document.createElement('canvas'),
+            circuit: generateCircuit(20),
+            packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
+        }
+    ]
+}
 function generateCircuit(nodeCount) {
     let nodes = [...Array(nodeCount)].map(() => ({
         x: Math.floor(Math.random() * gridSize),
@@ -155,28 +174,15 @@ function drawLayer(layer) {
         drawNodes(ctx, connection);
     });
 }
-let layers = [
-    {
-        canvas: document.createElement('canvas'),
-        circuit: generateCircuit(20),
-        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
-    },
-    {
-        canvas: document.createElement('canvas'),
-        circuit: generateCircuit(20),
-        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
-    },
-    {
-        canvas: document.createElement('canvas'),
-        circuit: generateCircuit(20),
-        packets: [{circuit: 0, progress: 0}, {circuit: 2, progress: 0}]
-    }
-];
+
+
+let layers = generateLayers();
 
 
 function draw(ctx) {
     requestAnimationFrame(() => (draw(ctx)));
     if (!layers[0].canvas || layers[0].canvas.width !== window.innerWidth || layers[0].canvas.height !== window.innerHeight) {
+        layers = generateLayers();
         layers.forEach(layer => {
             layer.canvas.width = window.innerWidth;
             layer.canvas.height = window.innerHeight;
@@ -207,4 +213,5 @@ function resizeCanvas() {
     let canvas = document.querySelector('#background');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    layers = generateLayers();
 }
