@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Desk Clock</title>
+    <link rel="manifest" href="./manifest.json">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui/augmented.css">
     <script src="nosleep.js"></script>
@@ -11,10 +12,16 @@
     <script src="timers.js?3" ></script>
     <script src="canvas.js" ></script>
     <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(function(reg) {
+                console.log('Successfully registered service worker', reg);
+            }).catch(function(err) {
+                console.warn('Error whilst registering service worker', err);
+            });
+        }
         document.addEventListener('DOMContentLoaded', () => {
             setInterval(updateTime, 500);
             updateTime();
-            noSleep.enable();
             document.body.addEventListener('click', () => { noSleep.enable(); });
             document.body.addEventListener('touchend', () => { noSleep.enable(); });
             new WorkTimer();
