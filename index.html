@@ -15,10 +15,8 @@
             setInterval(updateTime, 500);
             updateTime();
             noSleep.enable();
-            document.body.addEventListener('touchstart', () => {
-                console.log('enabling nosleep');
-                noSleep.enable();
-            });
+            document.body.addEventListener('click', () => { noSleep.enable(); });
+            document.body.addEventListener('touchend', () => { noSleep.enable(); });
             new WorkTimer();
             new PomodoroTimer();
 
@@ -32,7 +30,7 @@
         }, false);
     </script>
 </head>
-<body>
+<body ontouchstart="">
 <canvas id="background"></canvas>
 <div id="clock" class="container">
     <div id="time" class="container">
