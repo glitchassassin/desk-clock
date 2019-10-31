@@ -16,7 +16,7 @@
     <script src="nosleep.js"></script>
     <link href="styles.css" rel="stylesheet" type="text/css">
     <script src="clock.js"></script>
-    <script src="timers.js?3" ></script>
+    <script src="timers.js" ></script>
     <script src="canvas.js" ></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -29,8 +29,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             setInterval(updateTime, 500);
             updateTime();
-            document.body.addEventListener('click', () => { noSleep.enable(); });
-            document.body.addEventListener('touchend', () => { noSleep.enable(); });
+            document.body.addEventListener('click', () => { noSleep = new NoSleep(); noSleep.enable(); });
             new WorkTimer();
             new PomodoroTimer();
 

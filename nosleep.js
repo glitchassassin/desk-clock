@@ -78,7 +78,7 @@ class NoSleep {
     }
 }
 
-const noSleep = new NoSleep();
+var noSleep = new NoSleep();
 document.addEventListener('pageshow', () => {
     noSleep.noSleepVideo.play();
 });
