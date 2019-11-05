@@ -1,0 +1,40 @@
+.Clock {
+    height: 50%;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 7.5vh 0;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    width: 100%;
+    font-size: 13vw;
+}
+.Clock > div {
+    justify-content: right;
+    display: flex;
+    align-items: center;
+}
+
+.hours:after, .minutes:after {
+    content: ':';
+    font-size: 10vw;
+    width: 5vw;
+    margin-left: -2vw;
+}
+.hours {
+
+}
+.minutes {
+
+}
+.seconds {
+
+}
+.ampm {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 7vw;
+    text-transform: uppercase;
+}

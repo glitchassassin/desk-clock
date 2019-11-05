@@ -1,0 +1,53 @@
+.Calendar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 25vmax;
+    height: 33vmin;
+    font-size: 3vmax;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+
+    --aug-border: 5px;
+    --aug-border-bg: rgba(100, 200, 250, .8);
+    --aug-inset: 5px;
+    --aug-inset-bg: rgba(100, 200, 250, .3);
+    --aug-tr: 7vmin;
+    --aug-tr-height: 75%;
+}
+.Calendar:hover {
+    --aug-inset-bg: rgba(100, 200, 250, .4);
+}
+
+.dayOfWeek {
+    margin-right: 15px;
+    width: 100%;
+    padding-right: 3vmax;
+    padding-top: 3vmin;
+    text-align: center;
+    line-height: 15vmin;
+    font-size: 7vmax;
+    margin-bottom: 3vmin;
+    text-transform: uppercase;
+}
+
+.dayOfWeek:after {
+    content: ',';
+    display: none;
+}
+
+.monthName {
+    margin-right: 15px;
+    display: none;
+}
+
+.month, .day, .year {
+    display: flex;
+    align-items: center;
+}
+
+.month:after, .day:after {
+    content: '/';
+}
