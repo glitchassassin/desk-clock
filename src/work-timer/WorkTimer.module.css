@@ -10,6 +10,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: center;
+    z-index: 5;
 
     --aug-border: 5px;
     --aug-border-bg: rgba(100, 200, 250, .8);

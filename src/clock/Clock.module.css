@@ -1,15 +1,16 @@
 .Clock {
+    position: relative;
     height: 50%;
     border-radius: 10px;
     margin: 0 auto;
     padding: 7.5vh 0;
-    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: center;
     width: 100%;
     font-size: 13vw;
+    z-index: 5;
 }
 .Clock > div {
     justify-content: right;
