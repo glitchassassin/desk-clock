@@ -2,19 +2,41 @@ import React from 'react';
 
 import Node from "./Node";
 import Connection from "./Connection";
-import {Graphics} from "@inlet/react-pixi";
+import {Sprite, Graphics, withPixiApp} from "@inlet/react-pixi";
+import * as PIXI from 'pixi.js';
 
 class Circuit extends React.Component {
+    constructor(props) {
+        super(props);
+
+        // Set up sparkSprite
+        let gr = new PIXI.Graphics();
+        gr.beginFill(this.props.color);
+        gr.lineStyle();
+        gr.drawCircle(0, 0, 5);
+        gr.endFill();
+
+        this.sparkSprite = this.props.app.renderer.generateTexture(gr);
+    }
+
     state = {
         cache: true
     };
 
     render() {
+        console.log(this.sparkSprite);
         return (
-            <Graphics cacheAsBitmap={this.state.cache} draw={g => {
-                this.draw(g);
-            }} />
+            <>
+                <Graphics cacheAsBitmap={this.state.cache} draw={g => {
+                    this.draw(g);
+                }} />
+                <Sprite texture={this.sparkSprite} />
+            </>
         )
+    }
+
+    tick() {
+
     }
 
     componentDidMount() {
@@ -27,14 +49,16 @@ class Circuit extends React.Component {
                 cache: true
             });
         });
+
+
     }
 
     draw(g) {
         let dimensions = Math.max(this.props.width, this.props.height);
         let nodes = this.generateNodes(dimensions, dimensions).map(c => new Node(c, this.color));
-        let connections = this.generateConnections(nodes).map(c => new Connection(c, this.color));
+        this.connections = this.generateConnections(nodes).map(c => new Connection(c, this.color));
         g.clear();
-        connections.forEach(c => {
+        this.connections.forEach(c => {
             // Glow
             g.lineStyle(8, this.props.color, 0.3);
             let points = c.calculatePoints();
@@ -101,4 +125,4 @@ class Circuit extends React.Component {
     }
 }
 
-export default Circuit;
+export default withPixiApp(Circuit);

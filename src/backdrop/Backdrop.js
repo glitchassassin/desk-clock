@@ -11,11 +11,6 @@ class Backdrop extends React.Component {
         scroll: 0
     }
 
-    componentDidMount() {
-        this.layers = [];
-        this.layers.push(new Circuit())
-    }
-
     render() {
         let max_dimension = Math.max(this.state.width, this.state.height);
         return (
