@@ -35,8 +35,8 @@ class Circuit extends React.Component {
         )
     }
 
-    tick() {
-
+    tick = (delta) => {
+        // tween the spark along the current connection
     }
 
     componentDidMount() {
@@ -50,7 +50,7 @@ class Circuit extends React.Component {
             });
         });
 
-
+        this.props.app.ticker.add(this.tick);
     }
 
     draw(g) {
