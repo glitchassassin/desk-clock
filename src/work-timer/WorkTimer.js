@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+import styles from './WorkTimer.module.css';
+
 class WorkTimer extends React.Component {
     constructor(props) {
         super(props);
@@ -58,21 +60,22 @@ class WorkTimer extends React.Component {
             })
         } else {
             this.setState({
-                minutes: '25',
-                seconds: '00'
+                hours: '10',
+                minutes: '30'
             })
         }
     }
 
     render() {
+        let labelClasses = styles.label + ' ' + (styles[this.state.timerState])
         return (
-            <div onClick={this.toggleTimer}>
-                <div className="label">
+            <div className={styles.WorkTimer} onClick={this.toggleTimer} augmented-ui="tl-clip exe">
+                <div className={labelClasses}>
                     Start Work
                 </div>
-                <div className="countdown">
-                    <div className="hours">{this.state.hours}</div>
-                    <div className="minutes">{this.state.minutes}</div>
+                <div className={styles.countdown}>
+                    <div className={styles.hours}>{this.state.hours}</div>
+                    <div className={styles.minutes}>{this.state.minutes}</div>
                 </div>
             </div>
         )

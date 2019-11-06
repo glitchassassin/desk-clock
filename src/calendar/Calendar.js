@@ -39,7 +39,7 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <div className={styles.Calendar}>
+            <div className={styles.Calendar} augmented-ui="tr-clip-y exe">
                 <span className={styles.dayOfWeek}>{this.state.dayOfWeek}</span>
                 <span className={styles.monthName}>{this.state.monthName}</span>
                 <span className={styles.month}>{this.state.month}</span>

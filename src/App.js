@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import 'augmented-ui/augmented.css'
 import Clock from "./clock/Clock";
 import Calendar from './calendar/Calendar';
 import PomodoroTimer from "./pomodoro-timer/PomodoroTimer";

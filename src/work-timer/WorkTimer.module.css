@@ -1,0 +1,52 @@
+.WorkTimer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 25vmax;
+    height: 15vmin;
+    font-size: 3vmax;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+
+    --aug-border: 5px;
+    --aug-border-bg: rgba(100, 200, 250, .8);
+    --aug-inset: 5px;
+    --aug-inset-bg: rgba(100, 200, 250, .3);
+    --aug-tl: 7vmin;
+}
+
+.WorkTimer:hover {
+    --aug-inset-bg: rgba(100, 200, 250, .4);
+}
+
+.label {
+    line-height: 15vmin;
+}
+
+.label.running {
+    display: none;
+}
+
+.countdown {
+    line-height: 15vmin;
+    font-size: 5vmax;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.hours, .minutes {
+    display: flex;
+    align-items: center;
+}
+
+.hours:after {
+    content: ':';
+    font-size: 5vmax;
+    width: 2.5vmax;
+    margin-left: -1vmax;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+import styles from './PomodoroTimer.module.css';
+
 class PomodoroTimer extends React.Component {
     constructor(props) {
         super(props);
@@ -74,18 +76,18 @@ class PomodoroTimer extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="spinner" onClick={this.toggleTimer}>
-                    <svg className="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+            <div className={styles.PomodoroTimer}>
+                <div className={styles.spinner + ' ' + styles[this.state.timerState]} onClick={this.toggleTimer}>
+                    <svg className={styles.loader} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
                         <circle cx="170" cy="170" r="160" stroke="#ddd"/>
                         <circle cx="170" cy="170" r="150" stroke="#ddd"/>
                         <circle cx="170" cy="170" r="140" stroke="#ddd"/>
                         <circle cx="170" cy="170" r="130" stroke="#ddd"/>
                     </svg>
                 </div>
-                <div className="countdown">
-                    <div className="minutes">{this.state.minutes}</div>
-                    <div className="seconds">{this.state.seconds}</div>
+                <div className={styles.countdown}>
+                    <div className={styles.minutes}>{this.state.minutes}</div>
+                    <div className={styles.seconds}>{this.state.seconds}</div>
                 </div>
             </div>
         )
