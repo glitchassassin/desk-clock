@@ -120,12 +120,12 @@ body{
 
 .PomodoroTimer_PomodoroTimer__3CM2-{
     position:fixed;
-    bottom:40%;
+    bottom:33%;
     left:50%;
     margin-left:-10vmax;
     margin-bottom:-10vmax;
-    width:20vmax;
-    height:20vmax;
+    width:25vmax;
+    height:25vmax;
     cursor:pointer;
     display:flex;
     flex-wrap:wrap;
@@ -158,8 +158,8 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:20vmax;
-    height:20vmax;
+    min-height:25vmax;
+    height:25vmax;
     width:100%;
 }
 
@@ -171,15 +171,15 @@ body{
 
 .PomodoroTimer_loader__3qWbz circle{
     fill:none;
-    stroke-width:3.5;
+    stroke-width:10;
     -webkit-animation-name:PomodoroTimer_preloader__81buT;
             animation-name:PomodoroTimer_preloader__81buT;
     -webkit-animation-iteration-count:infinite;
             animation-iteration-count:infinite;
     -webkit-animation-timing-function:linear;
             animation-timing-function:linear;
-    -webkit-transform-origin:170px 170px;
-            transform-origin:170px 170px;
+    -webkit-transform-origin:200px 200px;
+            transform-origin:200px 200px;
     will-change:transform;
 }
 
@@ -305,4 +305,4 @@ circle:nth-of-type(4){
 }
 
 
-/*# sourceMappingURL=main.98bbfc84.chunk.css.map */
+/*# sourceMappingURL=main.b911505d.chunk.css.map */
