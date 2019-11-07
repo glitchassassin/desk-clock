@@ -22,7 +22,7 @@ class Backdrop extends React.Component {
                     {[...Array(3)].map((x, i) => (
                     <React.Fragment key={i}>
                         <Circuit color={0x84e8ff} density={50} width={max_dimension} height={max_dimension} />
-                        <Graphics x={0} y={0} width={max_dimension* 2} height={max_dimension* 2} draw={g => {
+                        <Graphics x={0} y={0} width={max_dimension * 2} height={max_dimension * 2} draw={g => {
                             g.clear();
                             g.beginFill(0x222222, 0.6);
                             g.drawRect(-max_dimension/ 2, -max_dimension/ 2, max_dimension*2, max_dimension*2);
@@ -33,6 +33,15 @@ class Backdrop extends React.Component {
                 </Stage>
             </div>
         )
+    }
+
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            this.setState({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        });
     }
 }
 

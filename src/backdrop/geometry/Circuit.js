@@ -4,10 +4,13 @@ import Node from "./Node";
 import Connection from "./Connection";
 import {Sprite, Graphics, withPixiApp} from "@inlet/react-pixi";
 import * as PIXI from 'pixi.js';
+import TweenPath from './TweenPath';
 
 class Circuit extends React.Component {
     constructor(props) {
         super(props);
+
+        this.speed = 8;
 
         // Set up sparkSprite
         let gr = new PIXI.Graphics();
@@ -16,35 +19,85 @@ class Circuit extends React.Component {
         gr.drawCircle(0, 0, 5);
         gr.endFill();
 
+        let dimensions = Math.max(this.props.width, this.props.height);
+        let nodes = this.generateNodes(dimensions, dimensions).map(c => new Node(c, this.color));
+        this.connections = this.generateConnections(nodes).map(c => new Connection(c, this.color));
+
         this.sparkSprite = this.props.app.renderer.generateTexture(gr);
     }
 
     state = {
-        cache: true
+        cache: true,
+        sparks: [
+            {
+                connection: 0,
+                distance: 0,
+                x: 0,
+                y: 0
+            },
+            {
+                connection: 1,
+                distance: 0,
+                x: 0,
+                y: 0
+            },
+            {
+                connection: 2,
+                distance: 0,
+                x: 0,
+                y: 0
+            },
+            {
+                connection: 3,
+                distance: 0,
+                x: 0,
+                y: 0
+            },
+        ]
     };
 
     render() {
-        console.log(this.sparkSprite);
         return (
             <>
                 <Graphics cacheAsBitmap={this.state.cache} draw={g => {
                     this.draw(g);
                 }} />
-                <Sprite texture={this.sparkSprite} />
+                {this.state.sparks.map((spark, i) => (
+                    <Sprite key={i} texture={this.sparkSprite} x={spark.x} y={spark.y} />
+                ))}
             </>
         )
     }
 
     tick = (delta) => {
-        // tween the spark along the current connection
+        this.setState({
+            sparks: this.state.sparks.map(spark => {
+                let s = {...spark};
+                let coordinates = TweenPath(this.connections[s.connection].calculatePoints(), s.distance);
+                if (!coordinates) {
+                    // End of path, select a new connection
+                    s.connection = Math.floor(Math.random() * this.connections.length);
+                    s.distance = 0;
+                    coordinates = TweenPath(this.connections[s.connection].calculatePoints(), s.distance);
+                }
+                s.x = coordinates[0] - (this.sparkSprite.width / 2);
+                s.y = coordinates[1] - (this.sparkSprite.height / 2);
+                s.distance += (this.speed * delta);
+                return s;
+            })
+        })
+
     }
 
     componentDidMount() {
         window.addEventListener('resize', () => {
-            console.log('resized');
             this.setState({
                 cache: false
             });
+            let dimensions = Math.max(this.props.width, this.props.height);
+            console.log(dimensions);
+            let nodes = this.generateNodes(dimensions, dimensions).map(c => new Node(c, this.color));
+            this.connections = this.generateConnections(nodes).map(c => new Connection(c, this.color));
             this.setState({
                 cache: true
             });
@@ -54,9 +107,6 @@ class Circuit extends React.Component {
     }
 
     draw(g) {
-        let dimensions = Math.max(this.props.width, this.props.height);
-        let nodes = this.generateNodes(dimensions, dimensions).map(c => new Node(c, this.color));
-        this.connections = this.generateConnections(nodes).map(c => new Connection(c, this.color));
         g.clear();
         this.connections.forEach(c => {
             // Glow
