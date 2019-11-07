@@ -16,7 +16,7 @@ class Backdrop extends React.Component {
         return (
             <div className={styles.Backdrop}>
                 <Stage width={max_dimension} height={max_dimension} options={{
-                    backgroundColor: 0x222222,
+                    backgroundColor: 0x111111,
                     resizeTo: window
                 }}>
                     {[...Array(3)].map((x, i) => (
@@ -24,7 +24,7 @@ class Backdrop extends React.Component {
                         <Circuit color={0x84e8ff} density={50} width={max_dimension} height={max_dimension} />
                         <Graphics x={0} y={0} width={max_dimension * 2} height={max_dimension * 2} draw={g => {
                             g.clear();
-                            g.beginFill(0x222222, 0.6);
+                            g.beginFill(0x111111, 0.4);
                             g.drawRect(-max_dimension/ 2, -max_dimension/ 2, max_dimension*2, max_dimension*2);
                             g.endFill();
                         }} />

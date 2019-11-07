@@ -1,11 +1,11 @@
 .PomodoroTimer {
     position: fixed;
-    bottom: 40%;
+    bottom: 33%;
     left: 50%;
     margin-left: -10vmax;
     margin-bottom: -10vmax;
-    width: 20vmax;
-    height: 20vmax;
+    width: 25vmax;
+    height: 25vmax;
     cursor: pointer;
     display: flex;
     flex-wrap: wrap;
@@ -40,8 +40,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 20vmax;
-    height: 20vmax;
+    min-height: 25vmax;
+    height: 25vmax;
     width: 100%;
 }
 
@@ -53,11 +53,11 @@
 
 .loader circle {
     fill: none;
-    stroke-width: 3.5;
+    stroke-width: 10;
     animation-name: preloader;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    transform-origin: 170px 170px;
+    transform-origin: 200px 200px;
     will-change: transform;
 }
 

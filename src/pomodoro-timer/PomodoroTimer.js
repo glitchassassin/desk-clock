@@ -78,11 +78,11 @@ class PomodoroTimer extends React.Component {
         return (
             <div className={styles.PomodoroTimer}>
                 <div className={styles.spinner + ' ' + styles[this.state.timerState]} onClick={this.toggleTimer}>
-                    <svg className={styles.loader} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
-                        <circle cx="170" cy="170" r="160" stroke="#ddd"/>
-                        <circle cx="170" cy="170" r="150" stroke="#ddd"/>
-                        <circle cx="170" cy="170" r="140" stroke="#ddd"/>
-                        <circle cx="170" cy="170" r="130" stroke="#ddd"/>
+                    <svg className={styles.loader} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+                        <circle cx="200" cy="200" r="175" stroke="#ddd"/>
+                        <circle cx="200" cy="200" r="160" stroke="#ddd"/>
+                        <circle cx="200" cy="200" r="145" stroke="#ddd"/>
+                        <circle cx="200" cy="200" r="130" stroke="#ddd"/>
                     </svg>
                 </div>
                 <div className={styles.countdown}>
