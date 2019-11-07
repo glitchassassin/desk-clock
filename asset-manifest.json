@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/desk-clock/static/css/main.98bbfc84.chunk.css",
-    "main.js": "/desk-clock/static/js/main.774650d7.chunk.js",
-    "main.js.map": "/desk-clock/static/js/main.774650d7.chunk.js.map",
+    "main.js": "/desk-clock/static/js/main.fe84a35b.chunk.js",
+    "main.js.map": "/desk-clock/static/js/main.fe84a35b.chunk.js.map",
     "runtime-main.js": "/desk-clock/static/js/runtime-main.898effa2.js",
     "runtime-main.js.map": "/desk-clock/static/js/runtime-main.898effa2.js.map",
     "static/css/2.37afa4cc.chunk.css": "/desk-clock/static/css/2.37afa4cc.chunk.css",
-    "static/js/2.639d6350.chunk.js": "/desk-clock/static/js/2.639d6350.chunk.js",
-    "static/js/2.639d6350.chunk.js.map": "/desk-clock/static/js/2.639d6350.chunk.js.map",
+    "static/js/2.2f91cdce.chunk.js": "/desk-clock/static/js/2.2f91cdce.chunk.js",
+    "static/js/2.2f91cdce.chunk.js.map": "/desk-clock/static/js/2.2f91cdce.chunk.js.map",
     "index.html": "/desk-clock/index.html",
-    "precache-manifest.a715435ada6ee25f9460570a8021bd62.js": "/desk-clock/precache-manifest.a715435ada6ee25f9460570a8021bd62.js",
+    "precache-manifest.e91be5d2a78be5fc3e89be693db6938b.js": "/desk-clock/precache-manifest.e91be5d2a78be5fc3e89be693db6938b.js",
     "service-worker.js": "/desk-clock/service-worker.js",
     "static/css/2.37afa4cc.chunk.css.map": "/desk-clock/static/css/2.37afa4cc.chunk.css.map",
     "static/css/main.98bbfc84.chunk.css.map": "/desk-clock/static/css/main.98bbfc84.chunk.css.map"
@@ -17,8 +17,8 @@
   "entrypoints": [
     "static/js/runtime-main.898effa2.js",
     "static/css/2.37afa4cc.chunk.css",
-    "static/js/2.639d6350.chunk.js",
+    "static/js/2.2f91cdce.chunk.js",
     "static/css/main.98bbfc84.chunk.css",
-    "static/js/main.774650d7.chunk.js"
+    "static/js/main.fe84a35b.chunk.js"
   ]
 }
