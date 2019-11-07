@@ -15,7 +15,6 @@ class App extends React.Component {
     }
 
     noSleepEnable = () => {
-        console.log('No sleeping');
         this.noSleep.disable();
         this.noSleep.enable();
     }
