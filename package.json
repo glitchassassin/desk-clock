@@ -5,15 +5,19 @@
   "dependencies": {
     "@inlet/react-pixi": "^1.1.7",
     "augmented-ui": "^1.1.0",
+    "gh-pages": "^2.1.1",
     "moment": "^2.24.0",
     "pixi.js": "^5.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
   },
+  "homepage": "https://glitchassassin.github.io/desk-clock",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
